@@ -47,3 +47,9 @@
 
 </div>
 
+<div class="fieldcontain">
+	<label for="additionalFieldName">
+		<input type="text" name="additionalFieldName" id="additionalFieldName"/>
+	</label>
+	<g:field type="text" name="additionalFieldValue" />	
+</div>

@@ -43,6 +43,10 @@ class EventController {
             return
         }
 
+        if(params.additionalFieldName && params.additionalFieldValue) {
+            eventInstance."${params.additionalFieldName}" = params.additionalFieldValue
+        }
+
         eventInstance.save flush:true
 
         request.withFormat {
@@ -91,7 +95,7 @@ class EventController {
 
         eventInstance.delete flush:true
 
-        request.withFormat {
+        request.withFormat { 
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Event.label', default: 'Event'), eventInstance.id])
                 redirect action:"index", method:"GET"
@@ -116,6 +120,7 @@ class EventController {
         event.organizers.add(organizer)
         event.save(failOnError: true)
         
-        render("ok")
+        flash.message = "Organizador adicionado com sucesso"
+        redirect(controller: "event", action: "show", id: params.eventId)
     }
 }
