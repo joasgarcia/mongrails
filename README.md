@@ -13,6 +13,7 @@
 - Configurar Grails
   - Crie a variável de ambiente `GRAILS_HOME` e popule com o caminho onde descompactou o Grails
   - Edite a variável de ambiente `PATH` e adicione `%GRAILS_HOME%/bin`
+  - Teste na linha de comando ```shell grails -version```
 
 - Instale o MongoDB
 
