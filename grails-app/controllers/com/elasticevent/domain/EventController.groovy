@@ -14,7 +14,13 @@ class EventController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Event.list(params), model:[eventInstanceCount: Event.count()]
+        def listOfEvent = Event.createCriteria().list(sort: params?.sort ?: "name", order: params?.order ?: "desc", max: params.max, offset: params.offset) {
+            if(params.name) {
+                like("name", "%" + params.name + "%")
+            }
+        }
+
+        respond listOfEvent, model:[eventInstanceCount: listOfEvent.totalCount]
     }
 
     def show(Event eventInstance) {
